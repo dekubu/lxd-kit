@@ -9,10 +9,12 @@ module LXDKit
     class Lxd < Abstract
 
       def upload!(local, remote, options = {})  
+        debugger
         puts "upload: #{remote} #{local} #{options}"
       end
 
       def download!(remote, local=nil, options = {})
+        debugger
         puts "download: #{remote} #{local} #{options}"
       end
 
