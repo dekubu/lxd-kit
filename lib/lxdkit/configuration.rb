@@ -40,7 +40,7 @@ module LXDKit
     end
 
     def backend
-      @backend ||= LXDKit::Backend::Netssh
+      @backend ||= LXDKit::Backend::Lxd
     end
 
     def output_verbosity
