@@ -18,8 +18,7 @@ module LXDKit
 
       
       def execute_command(_cmd)
-        "lxc exec #{_cmd.host} -- #{_cmd.to_command"
-        puts "execute: #{_cmd} - #{_cmd.class}"
+        `lxc exec #{_cmd.host} --sh -c '#{_cmd.to_command}'`
       end
 
     end
