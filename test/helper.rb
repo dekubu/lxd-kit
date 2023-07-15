@@ -22,7 +22,7 @@ class UnitTest < Minitest::Test
   LXDKit::Backend::ConnectionPool.class_eval do
     alias_method :old_flush_connections, :flush_connections
     def flush_connections
-      Thread.current[:sshkit_pool] = {}
+      Thread.current[:lxdkit_pool] = {}
     end
   end
 end

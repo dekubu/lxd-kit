@@ -16,7 +16,7 @@ module LXDKit
     #   end
     #
     def self.current
-      Thread.current["sshkit_backend"]
+      Thread.current["lxdkit_backend"]
     end
 
     class Abstract
@@ -27,10 +27,10 @@ module LXDKit
       attr_reader :host
 
       def run
-        Thread.current["sshkit_backend"] = self
+        Thread.current["lxdkit_backend"] = self
         instance_exec(@host, &@block)
       ensure
-        Thread.current["sshkit_backend"] = nil
+        Thread.current["lxdkit_backend"] = nil
       end
 
       def initialize(host, &block)
