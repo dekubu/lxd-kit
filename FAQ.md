@@ -1,13 +1,13 @@
 ## Is it better than Capistrano?
 
-*SSHKit* is designed to solve a different problem than Capistrano. *SSHKit* is
+*LXDKit* is designed to solve a different problem than Capistrano. *LXDKit* is
 a toolkit for performing structured commands on groups of servers in a
 repeatable way.
 
 It provides concurrency handling, sane error checking and control flow that
 would otherwise be difficult to achieve with pure *Net::SSH*.
 
-Since *Capistrano v3.0*, *SSHKit* is used by *Capistrano* to communicate with
+Since *Capistrano v3.0*, *LXDKit* is used by *Capistrano* to communicate with
 backend servers. Whilst Capistrano provides the structure for repeatable
 deployments.
 
@@ -31,7 +31,7 @@ If you experience consistent problems, please report it as an issue, I'll be
 in a position to give a better answer once I can examine the problem in more
 detail.
 
-## My daemon doesn't work properly when run from SSHKit
+## My daemon doesn't work properly when run from LXDKit
 
 You should probably read:
 

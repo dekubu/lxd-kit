@@ -1,15 +1,15 @@
 require 'time'
 require 'helper'
 
-module SSHKit
+module LXDKit
 
   class TestCoordinator < UnitTest
     def setup
       super
       @output = String.new
-      SSHKit.config.output_verbosity = :debug
-      SSHKit.config.output = SSHKit::Formatter::SimpleText.new(@output)
-      SSHKit.config.backend = SSHKit::Backend::Printer
+      LXDKit.config.output_verbosity = :debug
+      LXDKit.config.output = LXDKit::Formatter::SimpleText.new(@output)
+      LXDKit.config.backend = LXDKit::Backend::Printer
     end
 
     def echo_time
@@ -55,7 +55,7 @@ module SSHKit
       assert_at_least_1_sec_apart(actual_execution_times.first, actual_execution_times.last)
     end
 
-    class MyRunner < SSHKit::Runner::Parallel
+    class MyRunner < LXDKit::Runner::Parallel
       def execute
         threads = hosts.map do |host|
           Thread.new(host) do |h|
@@ -70,24 +70,24 @@ module SSHKit
 
     def test_the_connection_manager_can_run_things_in_custom_runner
       begin
-        $original_runner = SSHKit.config.default_runner
-        SSHKit.config.default_runner = MyRunner
+        $original_runner = LXDKit.config.default_runner
+        LXDKit.config.default_runner = MyRunner
 
         Coordinator.new(%w{1.example.com 2.example.com}).each(&echo_time)
         assert_equal 2, actual_execution_times.length
         assert_within_10_ms(actual_execution_times)
         assert_match(/custom runner out/, @output)
       ensure
-        SSHKit.config.default_runner = $original_runner
+        LXDKit.config.default_runner = $original_runner
       end
     end
 
     def test_the_connection_manager_can_run_things_with_custom_runner_configs
       begin
-        $original_runner = SSHKit.config.default_runner
-        SSHKit.config.default_runner = :groups
-        $original_runner_config = SSHKit.config.default_runner_config
-        SSHKit.config.default_runner_config = { limit: 2, wait: 5 }
+        $original_runner = LXDKit.config.default_runner
+        LXDKit.config.default_runner = :groups
+        $original_runner_config = LXDKit.config.default_runner_config
+        LXDKit.config.default_runner_config = { limit: 2, wait: 5 }
 
         Coordinator.new(
           %w{
@@ -103,8 +103,8 @@ module SSHKit
         assert_at_least_5_sec_apart(actual_execution_times[0], actual_execution_times[2])
         assert_at_least_5_sec_apart(actual_execution_times[1], actual_execution_times[3])
       ensure
-        SSHKit.config.default_runner = $original_runner
-        SSHKit.config.default_runner_config = $original_runner_config
+        LXDKit.config.default_runner = $original_runner
+        LXDKit.config.default_runner_config = $original_runner_config
       end
     end
 

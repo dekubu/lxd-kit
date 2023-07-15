@@ -1,6 +1,6 @@
 require 'helper'
 
-module SSHKit
+module LXDKit
   module Backend
     class TestLocal < UnitTest
 

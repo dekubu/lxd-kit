@@ -1,4 +1,4 @@
-module SSHKit
+module LXDKit
 
   StandardError = Class.new(::StandardError)
 
@@ -26,4 +26,4 @@ module SSHKit
 
 end
 
-require_relative 'sshkit/all'
+require_relative 'lxdkit/all'

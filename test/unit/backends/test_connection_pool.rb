@@ -1,7 +1,7 @@
 require 'helper'
 require 'ostruct'
 
-module SSHKit
+module LXDKit
   module Backend
     class TestConnectionPool < UnitTest
 
@@ -11,7 +11,7 @@ module SSHKit
       end
 
       def pool
-        @pool ||= SSHKit::Backend::ConnectionPool.new
+        @pool ||= LXDKit::Backend::ConnectionPool.new
       end
 
       def connect

@@ -1,7 +1,7 @@
 require 'helper'
 require 'tempfile'
 
-module SSHKit
+module LXDKit
   module Backend
     class TestNetssh < UnitTest
 
@@ -81,7 +81,7 @@ module SSHKit
       def perform_known_hosts_test(hostfile, hostlist, keys_count = 1)
         source = File.join(File.dirname(__FILE__), '../../known_hosts', hostfile)
         kh = Netssh::KnownHosts.new
-        keys = kh.search_for(hostlist, user_known_hosts_file: source, global_known_hosts_file: Tempfile.new('sshkit-test').path)
+        keys = kh.search_for(hostlist, user_known_hosts_file: source, global_known_hosts_file: Tempfile.new('lxdkit-test').path)
 
         assert_instance_of ::Net::SSH::HostKeys, keys
         assert_equal(keys_count, keys.count)

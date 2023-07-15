@@ -32,5 +32,5 @@ end
 
 Rake::Task["release"].enhance do
   puts "Don't forget to publish the release on GitHub!"
-  system "open https://github.com/capistrano/sshkit/releases"
+  system "open https://github.com/capistrano/lxdkit/releases"
 end

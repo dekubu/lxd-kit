@@ -1,5 +1,5 @@
 require 'helper'
-module SSHKit
+module LXDKit
 
   module Backend
 
@@ -7,7 +7,7 @@ module SSHKit
 
       def setup
         super
-        SSHKit.config.output = SSHKit::Formatter::BlackHole.new($stdout)
+        LXDKit.config.output = LXDKit::Formatter::BlackHole.new($stdout)
       end
 
       def test_upload
@@ -70,7 +70,7 @@ module SSHKit
       end
 
       def test_execute_raises_on_non_zero_exit_status_and_captures_stdout_and_stderr
-        err = assert_raises SSHKit::Command::Failed do
+        err = assert_raises LXDKit::Command::Failed do
           Local.new do
             execute :echo, "'Test capturing stderr' 1>&2; false"
           end.run

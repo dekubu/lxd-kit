@@ -2,7 +2,7 @@ require 'helper'
 require 'securerandom'
 require 'benchmark'
 
-module SSHKit
+module LXDKit
 
   module Backend
 
@@ -11,8 +11,8 @@ module SSHKit
       def setup
         super
         @output = String.new
-        SSHKit.config.output_verbosity = :debug
-        SSHKit.config.output = SSHKit::Formatter::SimpleText.new(@output)
+        LXDKit.config.output_verbosity = :debug
+        LXDKit.config.output = LXDKit::Formatter::SimpleText.new(@output)
       end
 
       def a_host
@@ -100,7 +100,7 @@ module SSHKit
         test_host = a_host.dup
         test_host.ssh_options = keepalive_opt
         host_ssh_options = {}
-        SSHKit::Backend::Netssh.config.ssh_options = { forward_agent: false }
+        LXDKit::Backend::Netssh.config.ssh_options = { forward_agent: false }
         Netssh.new(test_host) do |host|
           capture(:uname)
           host_ssh_options = host.ssh_options
@@ -108,7 +108,7 @@ module SSHKit
         assert_equal [:forward_agent, *keepalive_opt.keys, :known_hosts, :logger, :password_prompt].sort, host_ssh_options.keys.sort
         assert_equal false, host_ssh_options[:forward_agent]
         assert_equal keepalive_opt.values.first, host_ssh_options[keepalive_opt.keys.first]
-        assert_instance_of SSHKit::Backend::Netssh::KnownHosts, host_ssh_options[:known_hosts]
+        assert_instance_of LXDKit::Backend::Netssh::KnownHosts, host_ssh_options[:known_hosts]
       end
 
       def test_env_vars_substituion_in_subshell
@@ -122,7 +122,7 @@ module SSHKit
       end
 
       def test_execute_raises_on_non_zero_exit_status_and_captures_stdout_and_stderr
-        err = assert_raises SSHKit::Command::Failed do
+        err = assert_raises LXDKit::Command::Failed do
           Netssh.new(a_host) do |_host|
             execute :echo, "'Test capturing stderr' 1>&2; false"
           end.run
@@ -215,7 +215,7 @@ module SSHKit
 
       def test_connection_pool_keepalive
         # ensure we enable connection pool
-        SSHKit::Backend::Netssh.pool.idle_timeout = 10
+        LXDKit::Backend::Netssh.pool.idle_timeout = 10
         Netssh.new(a_host) do |_host|
           test :false
         end.run

@@ -1,11 +1,11 @@
 require 'helper'
 
-module SSHKit
+module LXDKit
   class TestSimpleText < UnitTest
 
     def setup
       super
-      SSHKit.config.output_verbosity = Logger::DEBUG
+      LXDKit.config.output_verbosity = Logger::DEBUG
     end
 
     def output
@@ -13,7 +13,7 @@ module SSHKit
     end
 
     def simple
-      @simple ||= SSHKit::Formatter::SimpleText.new(output)
+      @simple ||= LXDKit::Formatter::SimpleText.new(output)
     end
 
     %w(fatal error warn info debug).each do |level|
@@ -34,7 +34,7 @@ module SSHKit
     end
 
     def test_command_lifecycle_logging
-      command = SSHKit::Command.new(:a_cmd, 'some args', host: Host.new('user@localhost'))
+      command = LXDKit::Command.new(:a_cmd, 'some args', host: Host.new('user@localhost'))
       command.stubs(:uuid).returns('aaaaaa')
       command.stubs(:runtime).returns(1)
 
@@ -61,15 +61,15 @@ module SSHKit
       raised_error = assert_raises RuntimeError do
         simple << Pathname.new('/tmp')
       end
-      assert_equal('write only supports formatting SSHKit::LogMessage, called with Pathname: #<Pathname:/tmp>', raised_error.message)
+      assert_equal('write only supports formatting LXDKit::LogMessage, called with Pathname: #<Pathname:/tmp>', raised_error.message)
     end
 
     def test_does_not_log_when_verbosity_is_too_low
-      SSHKit.config.output_verbosity = Logger::WARN
+      LXDKit.config.output_verbosity = Logger::WARN
       simple.info('Some info')
       assert_log_output('')
 
-      SSHKit.config.output_verbosity = Logger::INFO
+      LXDKit.config.output_verbosity = Logger::INFO
       simple.info('Some other info')
       assert_log_output("Some other info\n")
     end

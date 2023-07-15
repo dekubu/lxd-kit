@@ -1,13 +1,13 @@
 require 'helper'
 
-module SSHKit
+module LXDKit
   module Backend
     class TestPrinter < UnitTest
 
       def setup
         super
-        SSHKit.config.output = SSHKit::Formatter::Pretty.new(output)
-        SSHKit.config.output_verbosity = Logger::DEBUG
+        LXDKit.config.output = LXDKit::Formatter::Pretty.new(output)
+        LXDKit.config.output_verbosity = Logger::DEBUG
         Command.any_instance.stubs(:uuid).returns('aaaaaa')
       end
 

@@ -1,11 +1,11 @@
 require 'helper'
 
-module SSHKit
+module LXDKit
   class TestDot < UnitTest
 
     def setup
       super
-      SSHKit.config.output_verbosity = Logger::DEBUG
+      LXDKit.config.output_verbosity = Logger::DEBUG
     end
 
     def output
@@ -13,7 +13,7 @@ module SSHKit
     end
 
     def dot
-      @dot ||= SSHKit::Formatter::Dot.new(output)
+      @dot ||= LXDKit::Formatter::Dot.new(output)
     end
 
     %w(fatal error warn info debug).each do |level|
@@ -24,18 +24,18 @@ module SSHKit
     end
 
     def test_log_command_start
-      dot.log_command_start(SSHKit::Command.new(:ls))
+      dot.log_command_start(LXDKit::Command.new(:ls))
       assert_log_output('')
     end
 
     def test_log_command_data
-      dot.log_command_data(SSHKit::Command.new(:ls), :stdout, 'Some output')
+      dot.log_command_data(LXDKit::Command.new(:ls), :stdout, 'Some output')
       assert_log_output('')
     end
 
     def test_command_success
       output.stubs(:tty?).returns(true)
-      command = SSHKit::Command.new(:ls)
+      command = LXDKit::Command.new(:ls)
       command.exit_status = 0
       dot.log_command_exit(command)
       assert_log_output("\e[0;32;49m.\e[0m")
@@ -43,7 +43,7 @@ module SSHKit
 
     def test_command_failure
       output.stubs(:tty?).returns(true)
-      command = SSHKit::Command.new(:ls, {raise_on_non_zero_exit: false})
+      command = LXDKit::Command.new(:ls, {raise_on_non_zero_exit: false})
       command.exit_status = 1
       dot.log_command_exit(command)
       assert_log_output("\e[0;31;49m.\e[0m")

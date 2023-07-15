@@ -1,9 +1,9 @@
 require 'helper'
 
-module SSHKit
+module LXDKit
 
   class TestDSL < UnitTest
-    include SSHKit::DSL
+    include LXDKit::DSL
 
     def test_dsl_on
       coordinator = mock

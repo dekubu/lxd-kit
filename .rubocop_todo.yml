@@ -18,7 +18,7 @@ Bundler/OrderedGems:
 # Cop supports --auto-correct.
 Layout/EmptyLineAfterMagicComment:
   Exclude:
-    - 'sshkit.gemspec'
+    - 'lxdkit.gemspec'
 
 # Offense count: 11
 # Cop supports --auto-correct.
@@ -26,9 +26,9 @@ Layout/EmptyLineAfterMagicComment:
 Layout/EmptyLineBetweenDefs:
   Exclude:
     - 'lib/core_ext/hash.rb'
-    - 'lib/sshkit/backends/abstract.rb'
-    - 'lib/sshkit/host.rb'
-    - 'lib/sshkit/log_message.rb'
+    - 'lib/lxdkit/backends/abstract.rb'
+    - 'lib/lxdkit/host.rb'
+    - 'lib/lxdkit/log_message.rb'
     - 'test/unit/formatters/test_pretty.rb'
     - 'test/unit/test_mapping_interaction_handler.rb'
 
@@ -43,7 +43,7 @@ Layout/EmptyLines:
 # Cop supports --auto-correct.
 Layout/EmptyLinesAroundAccessModifier:
   Exclude:
-    - 'lib/sshkit/runners/sequential.rb'
+    - 'lib/lxdkit/runners/sequential.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
@@ -52,7 +52,7 @@ Layout/EmptyLinesAroundAccessModifier:
 Layout/EmptyLinesAroundBlockBody:
   Exclude:
     - 'Rakefile'
-    - 'sshkit.gemspec'
+    - 'lxdkit.gemspec'
     - 'test/helper.rb'
 
 # Offense count: 73
@@ -66,7 +66,7 @@ Layout/EmptyLinesAroundClassBody:
 # Cop supports --auto-correct.
 Layout/EmptyLinesAroundMethodBody:
   Exclude:
-    - 'lib/sshkit/host.rb'
+    - 'lib/lxdkit/host.rb'
 
 # Offense count: 100
 # Cop supports --auto-correct.
@@ -112,15 +112,15 @@ Layout/IndentHash:
 # Configuration parameters: Width, IgnoredPatterns.
 Layout/IndentationWidth:
   Exclude:
-    - 'lib/sshkit/exception.rb'
+    - 'lib/lxdkit/exception.rb'
     - 'test/functional/backends/test_netssh.rb'
 
 # Offense count: 5
 # Cop supports --auto-correct.
 Layout/LeadingCommentSpace:
   Exclude:
-    - 'lib/sshkit/backends/netssh.rb'
-    - 'lib/sshkit/command.rb'
+    - 'lib/lxdkit/backends/netssh.rb'
+    - 'lib/lxdkit/command.rb'
     - 'test/helper.rb'
 
 # Offense count: 4
@@ -137,7 +137,7 @@ Layout/MultilineMethodCallBraceLayout:
 # SupportedStyles: aligned, indented, indented_relative_to_receiver
 Layout/MultilineMethodCallIndentation:
   Exclude:
-    - 'lib/sshkit/host.rb'
+    - 'lib/lxdkit/host.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -145,13 +145,13 @@ Layout/MultilineMethodCallIndentation:
 # SupportedStyles: aligned, indented
 Layout/MultilineOperationIndentation:
   Exclude:
-    - 'lib/sshkit/backends/netssh.rb'
+    - 'lib/lxdkit/backends/netssh.rb'
 
 # Offense count: 10
 # Cop supports --auto-correct.
 Layout/SpaceAfterComma:
   Exclude:
-    - 'lib/sshkit/command.rb'
+    - 'lib/lxdkit/command.rb'
     - 'test/functional/backends/test_netssh.rb'
     - 'test/unit/backends/test_netssh.rb'
     - 'test/unit/test_configuration.rb'
@@ -162,14 +162,14 @@ Layout/SpaceAfterComma:
 # SupportedStyles: space, no_space
 Layout/SpaceAroundEqualsInParameterDefault:
   Exclude:
-    - 'lib/sshkit/backends/abstract.rb'
-    - 'lib/sshkit/backends/local.rb'
-    - 'lib/sshkit/backends/netssh.rb'
-    - 'lib/sshkit/backends/netssh/known_hosts.rb'
-    - 'lib/sshkit/command_map.rb'
-    - 'lib/sshkit/runners/abstract.rb'
-    - 'lib/sshkit/runners/group.rb'
-    - 'lib/sshkit/runners/sequential.rb'
+    - 'lib/lxdkit/backends/abstract.rb'
+    - 'lib/lxdkit/backends/local.rb'
+    - 'lib/lxdkit/backends/netssh.rb'
+    - 'lib/lxdkit/backends/netssh/known_hosts.rb'
+    - 'lib/lxdkit/command_map.rb'
+    - 'lib/lxdkit/runners/abstract.rb'
+    - 'lib/lxdkit/runners/group.rb'
+    - 'lib/lxdkit/runners/sequential.rb'
     - 'test/helper.rb'
     - 'test/unit/backends/test_netssh.rb'
 
@@ -189,9 +189,9 @@ Layout/SpaceAroundOperators:
 # SupportedStyles: space, no_space
 Layout/SpaceBeforeBlockBraces:
   Exclude:
-    - 'lib/sshkit/command.rb'
-    - 'lib/sshkit/host.rb'
-    - 'sshkit.gemspec'
+    - 'lib/lxdkit/command.rb'
+    - 'lib/lxdkit/host.rb'
+    - 'lxdkit.gemspec'
     - 'test/unit/test_command_map.rb'
 
 # Offense count: 1
@@ -208,8 +208,8 @@ Layout/SpaceBeforeFirstArg:
 # SupportedStylesForEmptyBraces: space, no_space
 Layout/SpaceInsideBlockBraces:
   Exclude:
-    - 'lib/sshkit/command.rb'
-    - 'lib/sshkit/host.rb'
+    - 'lib/lxdkit/command.rb'
+    - 'lib/lxdkit/host.rb'
     - 'test/functional/backends/test_netssh.rb'
     - 'test/unit/test_configuration.rb'
 
@@ -220,8 +220,8 @@ Layout/SpaceInsideBlockBraces:
 # SupportedStylesForEmptyBraces: space, no_space
 Layout/SpaceInsideHashLiteralBraces:
   Exclude:
-    - 'lib/sshkit/backends/abstract.rb'
-    - 'lib/sshkit/backends/netssh.rb'
+    - 'lib/lxdkit/backends/abstract.rb'
+    - 'lib/lxdkit/backends/netssh.rb'
     - 'test/functional/backends/test_netssh.rb'
     - 'test/unit/backends/test_abstract.rb'
     - 'test/unit/formatters/test_dot.rb'
@@ -234,7 +234,7 @@ Layout/SpaceInsideHashLiteralBraces:
 # Cop supports --auto-correct.
 Layout/SpaceInsidePercentLiteralDelimiters:
   Exclude:
-    - 'lib/sshkit/formatters/pretty.rb'
+    - 'lib/lxdkit/formatters/pretty.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -242,7 +242,7 @@ Layout/SpaceInsidePercentLiteralDelimiters:
 # SupportedStyles: final_newline, final_blank_line
 Layout/TrailingBlankLines:
   Exclude:
-    - 'lib/sshkit/backends/netssh/known_hosts.rb'
+    - 'lib/lxdkit/backends/netssh/known_hosts.rb'
 
 # Offense count: 16
 # Cop supports --auto-correct.
@@ -250,17 +250,17 @@ Layout/TrailingBlankLines:
 # SupportedStyles: prefer_alias, prefer_alias_method
 Style/Alias:
   Exclude:
-    - 'lib/sshkit/backends/printer.rb'
-    - 'lib/sshkit/backends/skipper.rb'
-    - 'lib/sshkit/command.rb'
-    - 'lib/sshkit/formatters/abstract.rb'
-    - 'lib/sshkit/host.rb'
+    - 'lib/lxdkit/backends/printer.rb'
+    - 'lib/lxdkit/backends/skipper.rb'
+    - 'lib/lxdkit/command.rb'
+    - 'lib/lxdkit/formatters/abstract.rb'
+    - 'lib/lxdkit/host.rb'
     - 'test/unit/formatters/test_custom.rb'
 
 # Offense count: 2
 Style/AsciiComments:
   Exclude:
-    - 'lib/sshkit/command.rb'
+    - 'lib/lxdkit/command.rb'
     - 'test/helper.rb'
 
 # Offense count: 11
@@ -269,7 +269,7 @@ Style/AsciiComments:
 # SupportedStyles: percent_q, bare_percent
 Style/BarePercentLiterals:
   Exclude:
-    - 'lib/sshkit/command.rb'
+    - 'lib/lxdkit/command.rb'
     - 'test/unit/test_command.rb'
 
 # Offense count: 10
@@ -278,7 +278,7 @@ Style/BarePercentLiterals:
 # SupportedStyles: braces, no_braces, context_dependent
 Style/BracesAroundHashParameters:
   Exclude:
-    - 'lib/sshkit/backends/abstract.rb'
+    - 'lib/lxdkit/backends/abstract.rb'
     - 'test/functional/backends/test_netssh.rb'
     - 'test/unit/backends/test_abstract.rb'
     - 'test/unit/formatters/test_dot.rb'
@@ -289,7 +289,7 @@ Style/BracesAroundHashParameters:
 # Offense count: 1
 Style/CaseEquality:
   Exclude:
-    - 'lib/sshkit/mapping_interaction_handler.rb'
+    - 'lib/lxdkit/mapping_interaction_handler.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
@@ -297,8 +297,8 @@ Style/CaseEquality:
 # SupportedStyles: is_a?, kind_of?
 Style/ClassCheck:
   Exclude:
-    - 'lib/sshkit/command.rb'
-    - 'lib/sshkit/formatters/pretty.rb'
+    - 'lib/lxdkit/command.rb'
+    - 'lib/lxdkit/formatters/pretty.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -309,7 +309,7 @@ Style/ClassMethods:
 # Offense count: 3
 Style/ClassVars:
   Exclude:
-    - 'lib/sshkit.rb'
+    - 'lib/lxdkit.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -317,7 +317,7 @@ Style/ClassVars:
 # SupportedStyles: assign_to_condition, assign_inside_condition
 Style/ConditionalAssignment:
   Exclude:
-    - 'lib/sshkit/command_map.rb'
+    - 'lib/lxdkit/command_map.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -329,7 +329,7 @@ Style/EachWithObject:
 # Cop supports --auto-correct.
 Style/EmptyLiteral:
   Exclude:
-    - 'lib/sshkit/command.rb'
+    - 'lib/lxdkit/command.rb'
     - 'test/functional/backends/test_netssh.rb'
     - 'test/unit/backends/test_printer.rb'
     - 'test/unit/formatters/test_custom.rb'
@@ -345,8 +345,8 @@ Style/EmptyLiteral:
 # SupportedStyles: compact, expanded
 Style/EmptyMethod:
   Exclude:
-    - 'lib/sshkit/formatters/dot.rb'
-    - 'lib/sshkit/host.rb'
+    - 'lib/lxdkit/formatters/dot.rb'
+    - 'lib/lxdkit/host.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -354,7 +354,7 @@ Style/EmptyMethod:
 # SupportedStyles: format, sprintf, percent
 Style/FormatString:
   Exclude:
-    - 'lib/sshkit/formatters/pretty.rb'
+    - 'lib/lxdkit/formatters/pretty.rb'
 
 # Offense count: 6
 # Configuration parameters: AllowedVariables.
@@ -366,12 +366,12 @@ Style/GlobalVars:
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
   Exclude:
-    - 'lib/sshkit/backends/connection_pool.rb'
-    - 'lib/sshkit/backends/netssh.rb'
-    - 'lib/sshkit/command.rb'
-    - 'lib/sshkit/formatters/pretty.rb'
-    - 'lib/sshkit/host.rb'
-    - 'lib/sshkit/runners/sequential.rb'
+    - 'lib/lxdkit/backends/connection_pool.rb'
+    - 'lib/lxdkit/backends/netssh.rb'
+    - 'lib/lxdkit/command.rb'
+    - 'lib/lxdkit/formatters/pretty.rb'
+    - 'lib/lxdkit/host.rb'
+    - 'lib/lxdkit/runners/sequential.rb'
     - 'test/helper.rb'
 
 # Offense count: 33
@@ -381,7 +381,7 @@ Style/GuardClause:
 Style/HashSyntax:
   Exclude:
     - 'Rakefile'
-    - 'lib/sshkit/color.rb'
+    - 'lib/lxdkit/color.rb'
     - 'test/functional/backends/test_netssh.rb'
     - 'test/unit/backends/test_abstract.rb'
     - 'test/unit/backends/test_connection_pool.rb'
@@ -393,10 +393,10 @@ Style/HashSyntax:
 # Configuration parameters: MaxLineLength.
 Style/IfUnlessModifier:
   Exclude:
-    - 'lib/sshkit/backends/connection_pool.rb'
-    - 'lib/sshkit/backends/netssh/known_hosts.rb'
-    - 'lib/sshkit/configuration.rb'
-    - 'lib/sshkit/runners/sequential.rb'
+    - 'lib/lxdkit/backends/connection_pool.rb'
+    - 'lib/lxdkit/backends/netssh/known_hosts.rb'
+    - 'lib/lxdkit/configuration.rb'
+    - 'lib/lxdkit/runners/sequential.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -412,13 +412,13 @@ Style/Lambda:
 # SupportedStyles: call, braces
 Style/LambdaCall:
   Exclude:
-    - 'lib/sshkit/command_map.rb'
+    - 'lib/lxdkit/command_map.rb'
 
 # Offense count: 5
 # Cop supports --auto-correct.
 Style/LineEndConcatenation:
   Exclude:
-    - 'lib/sshkit/backends/netssh.rb'
+    - 'lib/lxdkit/backends/netssh.rb'
     - 'test/unit/test_command.rb'
 
 # Offense count: 3
@@ -435,7 +435,7 @@ Style/MethodCallWithoutArgsParentheses:
 # SupportedStyles: require_parentheses, require_no_parentheses, require_no_parentheses_except_multiline
 Style/MethodDefParentheses:
   Exclude:
-    - 'lib/sshkit/exception.rb'
+    - 'lib/lxdkit/exception.rb'
 
 # Offense count: 3
 # Configuration parameters: SupportedStyles.
@@ -464,21 +464,21 @@ Style/NumericLiterals:
 Style/NumericPredicate:
   Exclude:
     - 'spec/**/*'
-    - 'lib/sshkit/command.rb'
+    - 'lib/lxdkit/command.rb'
 
 # Offense count: 1
 Style/OpMethod:
   Exclude:
-    - 'lib/sshkit/host.rb'
+    - 'lib/lxdkit/host.rb'
 
 # Offense count: 6
 # Cop supports --auto-correct.
 Style/ParallelAssignment:
   Exclude:
-    - 'lib/sshkit/backends/netssh/known_hosts.rb'
-    - 'lib/sshkit/color.rb'
-    - 'lib/sshkit/command.rb'
-    - 'lib/sshkit/log_message.rb'
+    - 'lib/lxdkit/backends/netssh/known_hosts.rb'
+    - 'lib/lxdkit/color.rb'
+    - 'lib/lxdkit/command.rb'
+    - 'lib/lxdkit/log_message.rb'
     - 'test/helper.rb'
 
 # Offense count: 1
@@ -514,15 +514,15 @@ Style/RedundantParentheses:
 # Configuration parameters: AllowMultipleReturnValues.
 Style/RedundantReturn:
   Exclude:
-    - 'lib/sshkit/command.rb'
+    - 'lib/lxdkit/command.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
 Style/RedundantSelf:
   Exclude:
     - 'lib/core_ext/hash.rb'
-    - 'lib/sshkit/command.rb'
-    - 'lib/sshkit/host.rb'
+    - 'lib/lxdkit/command.rb'
+    - 'lib/lxdkit/host.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -544,15 +544,15 @@ Style/Semicolon:
 # SupportedStyles: only_raise, only_fail, semantic
 Style/SignalException:
   Exclude:
-    - 'lib/sshkit/configuration.rb'
-    - 'lib/sshkit/host.rb'
+    - 'lib/lxdkit/configuration.rb'
+    - 'lib/lxdkit/host.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: AllowIfMethodIsEmpty.
 Style/SingleLineMethods:
   Exclude:
-    - 'lib/sshkit/backends/abstract.rb'
+    - 'lib/lxdkit/backends/abstract.rb'
 
 # Offense count: 476
 # Cop supports --auto-correct.
@@ -567,9 +567,9 @@ Style/StringLiterals:
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiteralsInInterpolation:
   Exclude:
-    - 'lib/sshkit/command.rb'
-    - 'lib/sshkit/runners/parallel.rb'
-    - 'lib/sshkit/runners/sequential.rb'
+    - 'lib/lxdkit/command.rb'
+    - 'lib/lxdkit/runners/parallel.rb'
+    - 'lib/lxdkit/runners/sequential.rb'
 
 # Offense count: 5
 # Cop supports --auto-correct.
@@ -584,7 +584,7 @@ Style/SymbolArray:
 # SupportedStylesForMultiline: comma, consistent_comma, no_comma
 Style/TrailingCommaInLiteral:
   Exclude:
-    - 'lib/sshkit/host.rb'
+    - 'lib/lxdkit/host.rb'
     - 'test/unit/backends/test_netssh.rb'
     - 'test/unit/test_configuration.rb'
 
@@ -594,13 +594,13 @@ Style/TrailingCommaInLiteral:
 # Whitelist: to_ary, to_a, to_c, to_enum, to_h, to_hash, to_i, to_int, to_io, to_open, to_path, to_proc, to_r, to_regexp, to_str, to_s, to_sym
 Style/TrivialAccessors:
   Exclude:
-    - 'lib/sshkit/host.rb'
+    - 'lib/lxdkit/host.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/UnlessElse:
   Exclude:
-    - 'lib/sshkit/backends/netssh.rb'
+    - 'lib/lxdkit/backends/netssh.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -612,7 +612,7 @@ Style/UnneededCapitalW:
 # Cop supports --auto-correct.
 Style/UnneededPercentQ:
   Exclude:
-    - 'sshkit.gemspec'
+    - 'lxdkit.gemspec'
     - 'test/unit/test_command.rb'
 
 # Offense count: 1
@@ -626,7 +626,7 @@ Style/VariableNumber:
 # Cop supports --auto-correct.
 Style/WhileUntilDo:
   Exclude:
-    - 'lib/sshkit/backends/local.rb'
+    - 'lib/lxdkit/backends/local.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

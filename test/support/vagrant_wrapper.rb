@@ -50,7 +50,7 @@ class VagrantWrapper
           ssh_options: host_verify_options
       }
 
-      SSHKit::Host.new(host_options)
+      LXDKit::Host.new(host_options)
     end
 
     def host_verify_options

@@ -1,12 +1,12 @@
 require 'helper'
 
-module SSHKit
+module LXDKit
   # Try to maintain backwards compatibility with Custom formatters defined by other people
   class TestCustom < UnitTest
 
     def setup
       super
-      SSHKit.config.output_verbosity = Logger::DEBUG
+      LXDKit.config.output_verbosity = Logger::DEBUG
     end
 
     def output
@@ -56,12 +56,12 @@ module SSHKit
 
   end
 
-  class CustomFormatter < SSHKit::Formatter::Abstract
+  class CustomFormatter < LXDKit::Formatter::Abstract
     def write(obj)
       original_output << \
         case obj
-        when SSHKit::Command    then "C #{obj.verbosity} #{obj}"
-        when SSHKit::LogMessage then "LM #{obj.verbosity} #{obj}"
+        when LXDKit::Command    then "C #{obj.verbosity} #{obj}"
+        when LXDKit::LogMessage then "LM #{obj.verbosity} #{obj}"
         end
     end
     alias :<< :write

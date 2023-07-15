@@ -1,13 +1,13 @@
 require "helper"
-require "sshkit"
+require "lxdkit"
 
-module SSHKit
+module LXDKit
   module Runner
     class TestParallel < UnitTest
       def test_wraps_ruby_standard_error_in_execute_error
         host = Host.new("deployer@example")
         runner = Parallel.new([host]) { raise "oh no!" }
-        error = assert_raises(SSHKit::Runner::ExecuteError) do
+        error = assert_raises(LXDKit::Runner::ExecuteError) do
           runner.execute
         end
         assert_match(/deployer@example/, error.message)

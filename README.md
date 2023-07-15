@@ -1,10 +1,10 @@
-![SSHKit Logo](https://raw.github.com/leehambley/sshkit/master/examples/images/logo.png)
+![LXDKit Logo](https://raw.github.com/leehambley/lxdkit/master/examples/images/logo.png)
 
-**SSHKit** is a toolkit for running commands in a structured way on one or
+**LXDKit** is a toolkit for running commands in a structured way on one or
 more servers.
 
-[![Gem Version](https://badge.fury.io/rb/sshkit.svg)](https://rubygems.org/gems/sshkit)
-[![Build Status](https://github.com/capistrano/sshkit/actions/workflows/ci.yml/badge.svg)](https://github.com/capistrano/sshkit/actions/workflows/ci.yml)
+[![Gem Version](https://badge.fury.io/rb/lxdkit.svg)](https://rubygems.org/gems/lxdkit)
+[![Build Status](https://github.com/capistrano/lxdkit/actions/workflows/ci.yml/badge.svg)](https://github.com/capistrano/lxdkit/actions/workflows/ci.yml)
 
 ## Example
 
@@ -13,9 +13,9 @@ more servers.
  - Execute commands in serial (default is `:parallel`)
 
 ```ruby
-require 'sshkit'
-require 'sshkit/dsl'
-include SSHKit::DSL
+require 'lxdkit'
+require 'lxdkit/dsl'
+include LXDKit::DSL
 
 on ["1.example.com", "2.example.com"], in: :sequence do |host|
   puts "Now executing on #{host}"
@@ -45,10 +45,10 @@ All backends support the `execute(*args)`, `test(*args)` & `capture(*args)` meth
 for executing a command. You can call any of these methods in the context of an `on()`
 block.
 
-**Note: In SSHKit, the first parameter of the `execute` / `test` / `capture` methods
+**Note: In LXDKit, the first parameter of the `execute` / `test` / `capture` methods
 has a special significance. If the first parameter isn't a Symbol,
-SSHKit assumes that you want to execute the raw command and the
-`as` / `within` / `with` methods, `SSHKit.config.umask` and [the comand map](#the-command-map)
+LXDKit assumes that you want to execute the raw command and the
+`as` / `within` / `with` methods, `LXDKit.config.umask` and [the comand map](#the-command-map)
 have no effect.**
 
 Typically, you would pass a Symbol for the command name and it's args as follows:
@@ -79,14 +79,14 @@ end
 
 ### Users, working directories, environment variables and umask
 
-When running commands, you can tell SSHKit to set up the context for those
+When running commands, you can tell LXDKit to set up the context for those
 commands using the following methods:
 
 ```ruby
 as(user: 'un', group: 'grp') { execute('cmd') } # Executes sudo -u un -- sh -c 'sg grp cmd'
 within('/somedir') { execute('cmd') }           # Executes cd /somedir && cmd
 with(env_var: 'value') { execute('cmd') }       # Executes ENV_VAR=value cmd
-SSHKit.config.umask = '077'                     # All commands are executed with umask 077 && cmd
+LXDKit.config.umask = '077'                     # All commands are executed with umask 077 && cmd
 ```
 
 The `as()` / `within()` / `with()` are nestable in any order, repeatable, and stackable.
@@ -142,24 +142,24 @@ it too hard.
 Sequential runs were intended to be used for rolling restarts, amongst other
 similar use-cases.
 
-The default runner can be set with the `SSHKit.config.default_runner` option.  For
+The default runner can be set with the `LXDKit.config.default_runner` option.  For
 example:
  ```ruby
-SSHKit.config.default_runner = :parallel
-SSHKit.config.default_runner = :sequence
-SSHKit.config.default_runner = :groups
-SSHKit.config.default_runner = MyRunner # A custom runner
+LXDKit.config.default_runner = :parallel
+LXDKit.config.default_runner = :sequence
+LXDKit.config.default_runner = :groups
+LXDKit.config.default_runner = MyRunner # A custom runner
 ```
 
-If more control over the default runner is needed, the `SSHKit.config.default_runner_config`
+If more control over the default runner is needed, the `LXDKit.config.default_runner_config`
 can be set.
 ```ruby
 # Set the runner and then the config for the runner
-SSHKit.config.default_runner = :sequence
-SSHKit.config.default_runner_config = { wait: 5 }
+LXDKit.config.default_runner = :sequence
+LXDKit.config.default_runner_config = { wait: 5 }
 
 # Or just set everything once
-SSHKit.config.default_runner_config = { in: :sequence, wait: 5 }
+LXDKit.config.default_runner_config = { in: :sequence, wait: 5 }
 ```
 
 ## Synchronisation
@@ -240,7 +240,7 @@ quite simple, it's a *Hash* structure with a default key factory block
 specified, for example:
 
 ```ruby
-puts SSHKit.config.command_map[:ruby]
+puts LXDKit.config.command_map[:ruby]
 # => /usr/bin/env ruby
 ```
 
@@ -251,20 +251,20 @@ explicit hopefully leads people to explore the documentation.
 One can override the hash map for individual commands:
 
 ```ruby
-SSHKit.config.command_map[:rake] = "/usr/local/rbenv/shims/rake"
-puts SSHKit.config.command_map[:rake]
+LXDKit.config.command_map[:rake] = "/usr/local/rbenv/shims/rake"
+puts LXDKit.config.command_map[:rake]
 # => /usr/local/rbenv/shims/rake
 ```
 
 Another opportunity is to add command prefixes:
 
 ```ruby
-SSHKit.config.command_map.prefix[:rake].push("bundle exec")
-puts SSHKit.config.command_map[:rake]
+LXDKit.config.command_map.prefix[:rake].push("bundle exec")
+puts LXDKit.config.command_map[:rake]
 # => bundle exec rake
 
-SSHKit.config.command_map.prefix[:rake].unshift("/usr/local/rbenv/bin exec")
-puts SSHKit.config.command_map[:rake]
+LXDKit.config.command_map.prefix[:rake].unshift("/usr/local/rbenv/bin exec")
+puts LXDKit.config.command_map[:rake]
 # => /usr/local/rbenv/bin exec bundle exec rake
 ```
 
@@ -272,7 +272,7 @@ One can also override the command map completely, this may not be wise, but it
 would be possible, for example:
 
 ```ruby
-SSHKit.config.command_map = Hash.new do |hash, command|
+LXDKit.config.command_map = Hash.new do |hash, command|
   hash[command] = "/usr/local/rbenv/shims/#{command}"
 end
 ```
@@ -329,11 +329,11 @@ end
 execute(:passwd, interaction_handler: PasswdInteractionHandler.new)
 ```
 
-#### Using the `SSHKit::MappingInteractionHandler`
+#### Using the `LXDKit::MappingInteractionHandler`
 
 Often, you want to map directly from a short output string returned by the server (either stdout or stderr)
 to a corresponding input string (as in the case above). For this case you can specify
-the `interaction_handler` option as a hash. This is used to create a `SSHKit::MappingInteractionHandler` which
+the `interaction_handler` option as a hash. This is used to create a `LXDKit::MappingInteractionHandler` which
 provides similar functionality to the linux [expect](http://expect.sourceforge.net/) library:
 
 ```ruby
@@ -371,7 +371,7 @@ execute(:passwd, interaction_handler: lambda { |server_data|
 `MappingInteractionHandler`s are stateless, so you can assign one to a constant and reuse it:
 
 ```ruby
-ENTER_PASSWORD = SSHKit::MappingInteractionHandler.new(
+ENTER_PASSWORD = LXDKit::MappingInteractionHandler.new(
   "Please Enter Password\n" => "some_password\n"
 )
 
@@ -421,16 +421,16 @@ If you need to support both sorts of backends with the same interaction handler,
 you need to call methods on the appropriate API depending on the channel type.
 One approach is to detect the presence of the API methods you need -
 eg `channel.respond_to?(:send_data) # Net::SSH channel` and `channel.respond_to?(:write) # IO`.
-See the `SSHKit::MappingInteractionHandler` for an example of this.
+See the `LXDKit::MappingInteractionHandler` for an example of this.
 
 ## Output Handling
 
-![Example Output](https://raw.github.com/leehambley/sshkit/master/examples/images/example_output.png)
+![Example Output](https://raw.github.com/leehambley/lxdkit/master/examples/images/example_output.png)
 
 By default, the output format is set to `:pretty`:
 
 ```ruby
-SSHKit.config.use_format :pretty
+LXDKit.config.use_format :pretty
 ```
 
 However, if you prefer non colored text you can use the `:simpletext` formatter. If you want minimal output,
@@ -443,11 +443,11 @@ for example any `IO` subclass, `String`, `Logger` etc:
 ```ruby
 # Output to a String:
 output = String.new
-SSHKit.config.output = SSHKit::Formatter::Pretty.new(output)
+LXDKit.config.output = LXDKit::Formatter::Pretty.new(output)
 # Do something with output
 
 # Or output to a file:
-SSHKit.config.output = SSHKit::Formatter::SimpleText.new(File.open('log/deploy.log', 'wb'))
+LXDKit.config.output = LXDKit::Formatter::SimpleText.new(File.open('log/deploy.log', 'wb'))
 ```
 
 #### Output & Log Redaction
@@ -458,7 +458,7 @@ If necessary, `redact` can be used on a section of your `execute` arguments to h
 # Example from capistrano-postgresql gem
 execute(:psql, fetch(:pg_system_db), '-c', %Q{"CREATE USER \\"#{fetch(:pg_username)}\\" PASSWORD}, redact("'#{fetch(:pg_password)}'"), %Q{;"})
 ```
-Once wrapped, sshkit logging will replace the actual pg_password with a [REDACTED] value. The created database user will have the value from `fetch(:pg_password)`.
+Once wrapped, lxdkit logging will replace the actual pg_password with a [REDACTED] value. The created database user will have the value from `fetch(:pg_password)`.
 
 ```
 # STDOUT
@@ -484,7 +484,7 @@ execute :sudo, :echo, redact("CONTENT_WEB_TOOLS_PASS='#{ENV['CONTENT_WEB_TOOLS_P
 
 #### Output Colors
 
-By default, SSHKit will color the output using ANSI color escape sequences
+By default, LXDKit will color the output using ANSI color escape sequences
 if the output you are using is associated with a terminal device (tty).
 This means that you should see colors if you are writing output to the terminal (the default),
 but you shouldn't see ANSI color escape sequences if you are writing to a file.
@@ -492,7 +492,7 @@ but you shouldn't see ANSI color escape sequences if you are writing to a file.
 Colors are supported for the `Pretty` and `Dot` formatters, but for historical reasons
 the `SimpleText` formatter never shows colors.
 
-If you want to force SSHKit to show colors, you can set the `SSHKIT_COLOR` environment variable:
+If you want to force LXDKit to show colors, you can set the `SSHKIT_COLOR` environment variable:
 
 ```ruby
 ENV['SSHKIT_COLOR'] = 'TRUE'
@@ -502,17 +502,17 @@ ENV['SSHKIT_COLOR'] = 'TRUE'
 
 Want custom output formatting? Here's what you have to do:
 
-1. Write a new formatter class in the `SSHKit::Formatter` module. Your class should subclass `SSHKit::Formatter::Abstract` to inherit conveniences and common behavior. For a basic an example, check out the [Pretty](https://github.com/capistrano/sshkit/blob/master/lib/sshkit/formatters/pretty.rb) formatter.
+1. Write a new formatter class in the `LXDKit::Formatter` module. Your class should subclass `LXDKit::Formatter::Abstract` to inherit conveniences and common behavior. For a basic an example, check out the [Pretty](https://github.com/capistrano/lxdkit/blob/master/lib/lxdkit/formatters/pretty.rb) formatter.
 1. Set the output format as described above. E.g. if your new formatter is called `FooBar`:
 
 ```ruby
-SSHKit.config.use_format :foobar
+LXDKit.config.use_format :foobar
 ```
 
-All formatters that extend from `SSHKit::Formatter::Abstract` accept an options Hash as a constructor argument. You can pass options to your formatter like this:
+All formatters that extend from `LXDKit::Formatter::Abstract` accept an options Hash as a constructor argument. You can pass options to your formatter like this:
 
 ```ruby
-SSHKit.config.use_format :foobar, :my_option => "value"
+LXDKit.config.use_format :foobar, :my_option => "value"
 ```
 
 You can then access these options using the `options` accessor within your formatter code.
@@ -525,7 +525,7 @@ By default calls to `capture()` and `test()` are not logged, they are used
 *so* frequently by backend tasks to check environmental settings that it
 produces a large amount of noise. They are tagged with a verbosity option on
 the `Command` instances of `Logger::DEBUG`. The default configuration for
-output verbosity is available to override with `SSHKit.config.output_verbosity=`,
+output verbosity is available to override with `LXDKit.config.output_verbosity=`,
 and defaults to `Logger::INFO`.
 Another way to is to provide a hash containing `{verbosity: Logger::INFO}` as
 a last parameter for the method call.
@@ -535,51 +535,51 @@ At present the `Logger::WARN`, `ERROR` and `FATAL` are not used.
 ## Deprecation warnings
 
 Deprecation warnings are logged directly to `stderr` by default. This behaviour
-can be changed by setting the `SSHKit.config.deprecation_output` option:
+can be changed by setting the `LXDKit.config.deprecation_output` option:
 
 ```ruby
 # Disable deprecation warnings
-SSHKit.config.deprecation_output = nil
+LXDKit.config.deprecation_output = nil
 
 # Log deprecation warnings to a file
-SSHKit.config.deprecation_output = File.open('log/deprecation_warnings.log', 'wb')
+LXDKit.config.deprecation_output = File.open('log/deprecation_warnings.log', 'wb')
 ```
 
 ## Connection Pooling
 
-SSHKit uses a simple connection pool (enabled by default) to reduce the
+LXDKit uses a simple connection pool (enabled by default) to reduce the
 cost of negotiating a new SSH connection for every `on()` block. Depending on
 usage and network conditions, this can add up to a significant time savings.
 In one test, a basic `cap deploy` ran 15-20 seconds faster thanks to the
-connection pooling added in recent versions of SSHKit.
+connection pooling added in recent versions of LXDKit.
 
 To prevent connections from "going stale", an existing pooled connection will
 be replaced with a new connection if it hasn't been used for more than 30
 seconds. This timeout can be changed as follows:
 
 ```ruby
-SSHKit::Backend::Netssh.pool.idle_timeout = 60 # seconds
+LXDKit::Backend::Netssh.pool.idle_timeout = 60 # seconds
 ```
 
 If you suspect the connection pooling is causing problems, you can disable the
 pooling behaviour entirely by setting the idle_timeout to zero:
 
 ```ruby
-SSHKit::Backend::Netssh.pool.idle_timeout = 0 # disabled
+LXDKit::Backend::Netssh.pool.idle_timeout = 0 # disabled
 ```
 
 ## Tunneling and other related SSH themes
 
-In order to do special gymnastics with SSH, tunneling, aliasing, complex options, etc with SSHKit it is possible to use [the underlying Net::SSH API](https://github.com/capistrano/sshkit/blob/master/EXAMPLES.md#setting-global-ssh-options) however in many cases it is preferred to use the system SSH configuration file at [`~/.ssh/config`](http://man.cx/ssh_config). This allows you to have personal configuration tied to your machine that does not have to be committed with the repository. If this is not suitable (everyone on the team needs a proxy command, or some special aliasing) a file in the same format can be placed in the project directory at `~/yourproject/.ssh/config`, this will be merged with the system settings in `~/.ssh/config`, and with any configuration specified in [`SSHKit::Backend::Netssh.config.ssh_options`](https://github.com/capistrano/sshkit/blob/master/lib/sshkit/backends/netssh.rb#L133).
+In order to do special gymnastics with SSH, tunneling, aliasing, complex options, etc with LXDKit it is possible to use [the underlying Net::SSH API](https://github.com/capistrano/lxdkit/blob/master/EXAMPLES.md#setting-global-ssh-options) however in many cases it is preferred to use the system SSH configuration file at [`~/.ssh/config`](http://man.cx/ssh_config). This allows you to have personal configuration tied to your machine that does not have to be committed with the repository. If this is not suitable (everyone on the team needs a proxy command, or some special aliasing) a file in the same format can be placed in the project directory at `~/yourproject/.ssh/config`, this will be merged with the system settings in `~/.ssh/config`, and with any configuration specified in [`LXDKit::Backend::Netssh.config.ssh_options`](https://github.com/capistrano/lxdkit/blob/master/lib/lxdkit/backends/netssh.rb#L133).
 
-These system level files are the preferred way of setting up tunneling and proxies because the system implementations of these things are faster and better than the Ruby implementations you would get if you were to configure them through Net::SSH. In cases where it's not possible (Windows?), it should be possible to make use of the Net::SSH APIs to setup tunnels and proxy commands before deferring control to Capistrano/SSHKit..
+These system level files are the preferred way of setting up tunneling and proxies because the system implementations of these things are faster and better than the Ruby implementations you would get if you were to configure them through Net::SSH. In cases where it's not possible (Windows?), it should be possible to make use of the Net::SSH APIs to setup tunnels and proxy commands before deferring control to Capistrano/LXDKit..
 
 ## Proxying
 
 To connect to the target host via a jump/bastion host, use a `Net::SSH::Proxy::Jump`
 
 ```ruby
-host = SSHKit::Host.new(
+host = LXDKit::Host.new(
   hostname: 'target.host.com',
   ssh_options: { proxy: Net::SSH::Proxy::Jump.new("proxy.bar.com") }
 )
@@ -588,6 +588,6 @@ on [host] do
 end
 ```
 
-## SSHKit Related Blog Posts
+## LXDKit Related Blog Posts
 
-[Embedded Capistrano with SSHKit](http://ryandoyle.net/posts/embedded-capistrano-with-sshkit/)
+[Embedded Capistrano with LXDKit](http://ryandoyle.net/posts/embedded-capistrano-with-lxdkit/)

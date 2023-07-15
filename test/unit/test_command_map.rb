@@ -1,7 +1,7 @@
 require 'helper'
-require 'sshkit'
+require 'lxdkit'
 
-module SSHKit
+module LXDKit
   class TestCommandMap < UnitTest
 
     def test_defaults

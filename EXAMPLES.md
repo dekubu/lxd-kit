@@ -13,7 +13,7 @@ end
 ## Run with default environmental variables
 
 ```ruby
-SSHKit.config.default_env = { path: '/usr/local/libexec/bin:$PATH' }
+LXDKit.config.default_env = { path: '/usr/local/libexec/bin:$PATH' }
 on hosts do |host|
   puts capture(:env)
 end
@@ -35,7 +35,7 @@ end
 # Please see the documentation for caveats related to commands that do not use
 # the command map [such as simple strings].
 #
-# https://github.com/capistrano/sshkit#the-command-map
+# https://github.com/capistrano/lxdkit#the-command-map
 on hosts do |host|
   with rack_env: :test do
     puts capture("env | grep RACK_ENV")
@@ -57,7 +57,7 @@ end
 ```
 
 The `debug()`, `info()`, `warn()`, `error()` and `fatal()` honor the current
-log level of `SSHKit.config.output_verbosity`
+log level of `LXDKit.config.output_verbosity`
 
 ## Run a command in a different directory as a different user
 
@@ -168,7 +168,7 @@ Setting global SSH options, these will be overwritten by options set on the
 individual hosts:
 
 ```ruby
-SSHKit::Backend::Netssh.configure do |ssh|
+LXDKit::Backend::Netssh.configure do |ssh|
   ssh.connection_timeout = 30
   ssh.ssh_options = {
     user: 'adifferentuser',
@@ -235,46 +235,46 @@ end
 
 ```ruby
 # The default format is pretty, which outputs colored text
-SSHKit.config.format = :pretty
+LXDKit.config.format = :pretty
 
 # Text with no coloring
-SSHKit.config.format = :simpletext
+LXDKit.config.format = :simpletext
 
 # Red / Green dots for each completed step
-SSHKit.config.format = :dot
+LXDKit.config.format = :dot
 
 # No output
-SSHKit.config.format = :blackhole
+LXDKit.config.format = :blackhole
 ```
 
 ## Implement a dirt-simple formatter class
 
 ```ruby
-module SSHKit
+module LXDKit
   module Formatter
-    class MyFormatter < SSHKit::Formatter::Abstract
+    class MyFormatter < LXDKit::Formatter::Abstract
       def write(obj)
-        case obj.is_a? SSHKit::Command
-          # Do something here, see the SSHKit::Command documentation
+        case obj.is_a? LXDKit::Command
+          # Do something here, see the LXDKit::Command documentation
         end
       end
     end
   end
 end
 
-# If your formatter is defined in the SSHKit::Formatter module configure with the format option:
-SSHKit.config.format = :myformatter
+# If your formatter is defined in the LXDKit::Formatter module configure with the format option:
+LXDKit.config.format = :myformatter
 
 # Or configure the output directly
-SSHKit.config.output = MyFormatter.new($stdout)
-SSHKit.config.output = MyFormatter.new(SSHKit.config.output)
-SSHKit.config.output = MyFormatter.new(File.open('log/deploy.log', 'wb'))
+LXDKit.config.output = MyFormatter.new($stdout)
+LXDKit.config.output = MyFormatter.new(LXDKit.config.output)
+LXDKit.config.output = MyFormatter.new(File.open('log/deploy.log', 'wb'))
 ```
 
 ## Set a password for a host.
 
 ```ruby
-host = SSHKit::Host.new('user@example.com')
+host = LXDKit::Host.new('user@example.com')
 host.password = "hackme"
 
 on host do |host|
@@ -290,7 +290,7 @@ on hosts do |host|
 end
 ```
 
-This will raise `SSHKit::Command::Failed` with the `#message` "Example Message!"
+This will raise `LXDKit::Command::Failed` with the `#message` "Example Message!"
 which will cause the command to abort.
 
 ## Make a test, or run a command which may fail without raising an error:
@@ -314,8 +314,8 @@ returns boolean it can be used to direct the control flow within the block.
 ## Do something different on one host, or another depending on a host property
 
 ```ruby
-host1 = SSHKit::Host.new 'user@example.com'
-host2 = SSHKit::Host.new 'user@example.org'
+host1 = LXDKit::Host.new 'user@example.com'
+host2 = LXDKit::Host.new 'user@example.org'
 
 on hosts do |host|
   target = "/var/www/sites/"
@@ -336,7 +336,7 @@ on 'example.com' do |host|
 end
 ```
 
-This will resolve the `example.com` hostname into a `SSHKit::Host` object, and
+This will resolve the `example.com` hostname into a `LXDKit::Host` object, and
 try to pull up the correct configuration for it.
 
 ## Connect to a host on a port different than 22
@@ -391,13 +391,13 @@ known test cases, it works. The key thing is that `if` is not mapped to
 Into the `Rakefile` simply put something like:
 
 ```ruby
-require 'sshkit'
+require 'lxdkit'
 
-SSHKit.config.command_map[:rake] = "./bin/rake"
+LXDKit.config.command_map[:rake] = "./bin/rake"
 
 desc "Deploy the site, pulls from Git, migrate the db and precompile assets, then restart Passenger."
 task :deploy do
-  include SSHKit::DSL
+  include LXDKit::DSL
 
   on "example.com" do |host|
     within "/opt/sites/example.com" do
@@ -417,12 +417,12 @@ The *Coordinator* will resolve all hosts into *Host* objects, you can mix and
 match.
 
 ```ruby
-Coordinator.new("one.example.com", SSHKit::Host.new('two.example.com')).each in: :sequence do
+Coordinator.new("one.example.com", LXDKit::Host.new('two.example.com')).each in: :sequence do
   puts capture :uptime
 end
 ```
 
-You might also look at `./lib/sshkit/dsl.rb` where you can see almost the
+You might also look at `./lib/lxdkit/dsl.rb` where you can see almost the
 exact code as above, which implements the `on()` method.
 
 ## Use the Host properties attribute
@@ -432,7 +432,7 @@ Implemented since `v0.0.6`
 ```ruby
 servers = %w{one.example.com two.example.com
              three.example.com four.example.com}.collect do |s|
-  h = SSHKit::Host.new(s)
+  h = LXDKit::Host.new(s)
   if s.match /(one|two)/
     h.properties.roles = [:web]
   else
@@ -449,7 +449,7 @@ on servers do |host|
 end
 ```
 
-The `SSHKit::Host#properties` is an [`OpenStruct`](http://ruby-doc.org/stdlib-1.9.3/libdoc/ostruct/rdoc/OpenStruct.html)
+The `LXDKit::Host#properties` is an [`OpenStruct`](http://ruby-doc.org/stdlib-1.9.3/libdoc/ostruct/rdoc/OpenStruct.html)
 which is not verified or validated in any way, it is up to you, or your
 library to attach meanings or conventions to this mechanism.
 

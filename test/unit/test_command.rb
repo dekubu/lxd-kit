@@ -1,7 +1,7 @@
 require 'helper'
-require 'sshkit'
+require 'lxdkit'
 
-module SSHKit
+module LXDKit
   class TestCommand < UnitTest
 
     def test_maps_a_command
@@ -31,50 +31,50 @@ module SSHKit
     end
 
     def test_including_the_env
-      SSHKit.config = nil
+      LXDKit.config = nil
       c = Command.new(:rails, 'server', env: {rails_env: :production})
       assert_equal %{( export RAILS_ENV="production" ; /usr/bin/env rails server )}, c.to_command
     end
 
     def test_including_the_env_with_multiple_keys
-      SSHKit.config = nil
+      LXDKit.config = nil
       c = Command.new(:rails, 'server', env: {rails_env: :production, foo: 'bar'})
       assert_equal %{( export RAILS_ENV="production" FOO="bar" ; /usr/bin/env rails server )}, c.to_command
     end
 
     def test_including_the_env_with_string_keys
-      SSHKit.config = nil
+      LXDKit.config = nil
       c = Command.new(:rails, 'server', env: {'FACTER_env' => :production, foo: 'bar'})
       assert_equal %{( export FACTER_env="production" FOO="bar" ; /usr/bin/env rails server )}, c.to_command
     end
 
     def test_double_quotes_are_escaped_in_env
-      SSHKit.config = nil
+      LXDKit.config = nil
       c = Command.new(:rails, 'server', env: {foo: 'asdf"hjkl'})
       assert_equal %{( export FOO="asdf\\"hjkl" ; /usr/bin/env rails server )}, c.to_command
     end
 
     def test_percentage_symbol_handled_in_env
-      SSHKit.config = nil
+      LXDKit.config = nil
       c = Command.new(:rails, 'server', env: {foo: 'asdf%hjkl'}, user: "anotheruser")
       assert_equal %{( export FOO="asdf%hjkl" ; sudo -u anotheruser FOO=\"asdf%hjkl\" -- sh -c /usr/bin/env\\ rails\\ server )}, c.to_command
     end
 
     def test_including_the_env_doesnt_addressively_escape
-      SSHKit.config = nil
+      LXDKit.config = nil
       c = Command.new(:rails, 'server', env: {path: '/example:$PATH'})
       assert_equal %{( export PATH="/example:$PATH" ; /usr/bin/env rails server )}, c.to_command
     end
 
     def test_global_env
-      SSHKit.config = nil
-      SSHKit.config.default_env = { default: 'env' }
+      LXDKit.config = nil
+      LXDKit.config.default_env = { default: 'env' }
       c = Command.new(:rails, 'server', env: {})
       assert_equal %{( export DEFAULT="env" ; /usr/bin/env rails server )}, c.to_command
     end
 
     def test_default_env_is_overwritten_with_locally_defined
-      SSHKit.config.default_env = { foo: 'bar', over: 'under' }
+      LXDKit.config.default_env = { foo: 'bar', over: 'under' }
       c = Command.new(:rails, 'server', env: { over: 'write'})
       assert_equal %{( export FOO="bar" OVER="write" ; /usr/bin/env rails server )}, c.to_command
     end
@@ -131,25 +131,25 @@ module SSHKit
     end
 
     def test_umask
-      SSHKit.config.umask = '007'
+      LXDKit.config.umask = '007'
       c = Command.new(:touch, 'somefile')
       assert_equal "umask 007 && /usr/bin/env touch somefile", c.to_command
     end
 
     def test_umask_with_working_directory
-      SSHKit.config.umask = '007'
+      LXDKit.config.umask = '007'
       c = Command.new(:touch, 'somefile', in: '/opt')
       assert_equal "cd /opt && umask 007 && /usr/bin/env touch somefile", c.to_command
     end
 
     def test_umask_with_working_directory_and_user
-      SSHKit.config.umask = '007'
+      LXDKit.config.umask = '007'
       c = Command.new(:touch, 'somefile', in: '/var', user: 'alice')
       assert_equal "cd /var && umask 007 && sudo -u alice -- sh -c /usr/bin/env\\ touch\\ somefile", c.to_command
     end
 
     def test_umask_with_env_and_working_directory_and_user
-      SSHKit.config.umask = '007'
+      LXDKit.config.umask = '007'
       c = Command.new(:touch, 'somefile', user: 'bob', env: {a: 'b'}, in: '/var')
       assert_equal %{cd /var && umask 007 && ( export A="b" ; sudo -u bob A="b" -- sh -c /usr/bin/env\\ touch\\ somefile )}, c.to_command
     end
@@ -212,7 +212,7 @@ module SSHKit
 
     def test_deprecated_stdtream_accessors
       deprecation_out = ''
-      SSHKit.config.deprecation_output = deprecation_out
+      LXDKit.config.deprecation_output = deprecation_out
 
       c = Command.new(:whoami)
       c.stdout='a test'
@@ -259,7 +259,7 @@ module SSHKit
     end
 
     def test_command_raises_command_failed_error_when_non_zero_exit
-      error = assert_raises SSHKit::Command::Failed do
+      error = assert_raises LXDKit::Command::Failed do
         Command.new(:whoami).exit_status = 1
       end
       assert_equal "whoami exit status: 1\nwhoami stdout: Nothing written\nwhoami stderr: Nothing written\n", error.message

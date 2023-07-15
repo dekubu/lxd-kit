@@ -1,4 +1,4 @@
-# Contributing to SSHKit
+# Contributing to LXDKit
 
  * Use [Stack Overflow][so] for Capistrano-related how-to questions and support
  * [**Don't** push your pull request](http://www.igvita.com/2011/12/19/dont-push-your-pull-requests/)
@@ -7,11 +7,11 @@
 
 ## Getting help
 
-Most users encounter SSHKit primarily by using Capistrano. If you have a question about using
-SSHKit in context of Capistrano, please use the [capistrano tag on Stack Overflow][so].
+Most users encounter LXDKit primarily by using Capistrano. If you have a question about using
+LXDKit in context of Capistrano, please use the [capistrano tag on Stack Overflow][so].
 
-If you are using SSHKit directly, or if you think you've found a bug in SSHKit, please open a
-[GitHub issue](https://github.com/capistrano/sshkit/issues).
+If you are using LXDKit directly, or if you think you've found a bug in LXDKit, please open a
+[GitHub issue](https://github.com/capistrano/lxdkit/issues).
 
 [so]: http://stackoverflow.com/questions/tagged/capistrano
 
@@ -24,9 +24,9 @@ using unsupported features.
 
 ## Tests
 
-SSHKit has a unit test suite and a functional test suite. Some functional tests run against
+LXDKit has a unit test suite and a functional test suite. Some functional tests run against
 [Vagrant](https://www.vagrantup.com/) VMs. If possible, you should make sure that the
-tests pass for each commit by running `rake` in the sshkit directory. This is in case we
+tests pass for each commit by running `rake` in the lxdkit directory. This is in case we
 need to cherry pick commits or rebase. You should ensure the tests pass, (preferably on
 the minimum and maximum ruby version), before creating a PR.
 
@@ -34,7 +34,7 @@ Pull requests are much more likely to be accepted if you write a tests for the n
 you are adding. If you are fixing a bug, it would be great if you could add a test to
 expose the bug you are fixing to show that the behaviour is fixed by your changes.
 
-We use [Travis CI](https://travis-ci.org/capistrano/sshkit) to run the tests on different
+We use [Travis CI](https://travis-ci.org/capistrano/lxdkit) to run the tests on different
 ruby versions.
 
 **The Travis build does not run the functional tests,

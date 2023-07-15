@@ -1,6 +1,6 @@
 require 'helper'
 
-module SSHKit
+module LXDKit
 
   class TestHost < FunctionalTest
 

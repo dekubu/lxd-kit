@@ -1,6 +1,6 @@
 require 'helper'
 
-module SSHKit
+module LXDKit
 
   module Backend
 
@@ -113,7 +113,7 @@ module SSHKit
 
       def test_background_logs_deprecation_warnings
         deprecation_out = ''
-        SSHKit.config.deprecation_output = deprecation_out
+        LXDKit.config.deprecation_output = deprecation_out
 
         ExampleBackend.new do
           background :ls
@@ -132,7 +132,7 @@ module SSHKit
           execute(:some_command)
         end
 
-        assert_raises(SSHKit::Backend::MethodUnavailableError) do
+        assert_raises(LXDKit::Backend::MethodUnavailableError) do
           abstract.run
         end
       end
@@ -157,7 +157,7 @@ module SSHKit
 
         backend = ExampleBackend.new do
           backend = self
-          current = SSHKit::Backend.current
+          current = LXDKit::Backend.current
         end
         backend.run
 
@@ -170,7 +170,7 @@ module SSHKit
         end
         backend.run
 
-        assert_nil(SSHKit::Backend.current)
+        assert_nil(LXDKit::Backend.current)
       end
 
       # Use a concrete ExampleBackend rather than a mock for improved assertion granularity
