@@ -16,8 +16,9 @@ module LXDKit
         puts "download: #{remote} #{local} #{options}"
       end
 
-      def execute(*args)
-        puts "execute: #{args}"
+      
+      def def execute_command(_cmd)
+        puts "execute: #{_cmd}"
       end
 
     end
