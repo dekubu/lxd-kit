@@ -1,3 +1,3 @@
 module LXDKit
-  VERSION = "0.0.0.alpha".freeze
+  VERSION = "0.0.1".freeze
 end
