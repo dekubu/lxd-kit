@@ -38,3 +38,5 @@ require_relative 'backends/lxd'
 
 require_relative 'backends/local'
 require_relative 'backends/skipper'
+
+require 'debug'

@@ -32,5 +32,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('mocha')
 
   gem.add_development_dependency('bcrypt_pbkdf')
+  gem.add_development_dependency('debug')
   gem.add_development_dependency('ed25519', '>= 1.2', '< 2.0')
 end
