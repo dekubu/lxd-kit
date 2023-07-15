@@ -18,7 +18,7 @@ module LXDKit
 
       
       def execute_command(_cmd)
-        puts "execute: #{_cmd}"
+        puts "execute: #{_cmd} - #{_cmd.class}"
       end
 
     end
