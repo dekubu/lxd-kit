@@ -21,15 +21,7 @@ module LXDKit
         exit_status = nil
         `lxc exec #{cmd.host} -- sh -c '#{cmd.to_command}'`
         exit_status = 0
-
         cmd.exit_status = exit_status
-        
-        output.log_command_exit(cmd)        
-        # Set exit_status and log the result upon completion
-        if exit_status
-          cmd.exit_status = exit_status
-          output.log_command_exit(cmd)
-        end
       end
 
     end
