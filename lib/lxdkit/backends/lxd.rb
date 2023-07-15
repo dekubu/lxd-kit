@@ -6,7 +6,7 @@ module LXDKit
 
   module Backend
 
-    class lxd < Abstract
+    class Lxd < Abstract
 
       def upload!(local, remote, options = {})
         puts "upload: #{remote} #{local} #{options}"
@@ -21,5 +21,7 @@ module LXDKit
       end
 
     end
+
+  end
 
 end
