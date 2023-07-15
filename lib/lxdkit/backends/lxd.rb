@@ -18,9 +18,8 @@ module LXDKit
 
       
       def execute_command(_cmd)
-        debugger
+        "lxc exec #{_cmd.host} -- #{_cmd.to_command"
         puts "execute: #{_cmd} - #{_cmd.class}"
-
       end
 
     end
