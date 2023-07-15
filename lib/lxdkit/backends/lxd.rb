@@ -8,7 +8,7 @@ module LXDKit
 
     class Lxd < Abstract
 
-      def upload!(local, remote, options = {})
+      def upload!(local, remote, options = {})  
         puts "upload: #{remote} #{local} #{options}"
       end
 
@@ -18,7 +18,9 @@ module LXDKit
 
       
       def execute_command(_cmd)
+        debbuger
         puts "execute: #{_cmd} - #{_cmd.class}"
+
       end
 
     end
