@@ -88,14 +88,6 @@ module LXDKit
     def exit_status=(new_exit_status)
       @finished_at = Time.now
       @exit_status = new_exit_status
-
-      if options[:raise_on_non_zero_exit] && exit_status > 0
-        message = ""
-        message += "#{command} exit status: " + exit_status.to_s + "\n"
-        message += "#{command} stdout: " + (full_stdout.strip.empty? ? "Nothing written" : full_stdout.strip) + "\n"
-        message += "#{command} stderr: " + (full_stderr.strip.empty? ? 'Nothing written' : full_stderr.strip) + "\n"
-        raise Failed, message
-      end
     end
 
     def runtime
