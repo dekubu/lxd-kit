@@ -21,7 +21,7 @@ module LXDKit
       def execute_command(cmd)
         output.log_command_start(cmd.with_redaction)
         exit_status = nil
-        `lxc exec #{cmd.host} -- sh -c '#{cmd.to_command}'`
+        `lxc exec #{cmd.host} -- #{cmd.to_command}`
         exit_status = 0
         cmd.exit_status = exit_status
       end
