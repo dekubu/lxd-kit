@@ -22,8 +22,8 @@ module LXDKit
         output.log_command_start(cmd.with_redaction)
         exit_status = nil
         `lxc exec #{cmd.host} -- #{cmd.to_command}`
-        exit_status = 0
-        cmd.exit_status = exit_status
+        exit_status = $?.exitstatus
+        cmd.exit_status = $?.exitstatus
          output.log_command_exit(cmd)
       end
 
